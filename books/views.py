@@ -1,7 +1,10 @@
 from django.shortcuts import render
-from django.views.generic import (TemplateView, ListView, CreateView, DetailView)
+from django.views.generic import (TemplateView, ListView, CreateView, DetailView, FormView)
+from django.views.generic.edit import UpdateView
 from .models import Author 
 from django.contrib import messages
+from django.views.generic.detail import SingleObjectMixin
+
 
 
 class HomeView(TemplateView):
@@ -32,3 +35,12 @@ class AuthorCreateView(CreateView):
 class AuthorDetailView(DetailView):
     model = Author
     template_name = "books/author_detail.html"
+
+
+
+# SingleObjectMixin----select one item from database
+# FormView----receive the form from page
+class AuthorBooksUpadateView(SingleObjectMixin, FormView):
+
+    model = Author
+    template_name = 'books/author_book_edit.html'
